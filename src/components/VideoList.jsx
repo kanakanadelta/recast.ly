@@ -1,12 +1,15 @@
-var VideoList = () => (
-  <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-  </div>
-);
+var VideoList = (props) => {
+  // console.log(props);
+  //target DOM element with 'video-list' class name
+    //map out each new instance of VideoListEntry w/ each individual video data.
+  return (
+    <div className="video-list">
+      {props.videos.map( (video) => 
+        <VideoListEntry video={video} key={video.id.videoId}/>
+      )}
+    </div>
+  );
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

@@ -3,20 +3,28 @@ class App extends React.Component {
   //inheriting the whole object of props and the React.Component Super Class
   constructor(props) {
     super(props);
-    console.log(this.props.data[0]);
     //this is being passed down to all the component children (i.e. Search, VideoPlayer, VideoList)
     this.state = {
       //want to have a listener for selecting a video in VideoList
       // currentVideo: <VideoPlayer video={} />,
       currentVideo: this.props.data[0],
+      currentSearchInput: '',
     };
   }
 
-  onVideoClick(event) {
+  handleVideoClick(event) {
     //using the built in setState function ...
+    console.log(event);
     this.setState({
       //modify property in this.state
       currentVideo: event,
+    });
+  }
+
+  handleSearchChange(event) {
+    console.log(event);
+    this.setState({
+      currentSearchInput: searchYouTube(options(event)),
     });
   }
 
@@ -28,7 +36,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><Search videos={this.props}/></div>
+            <div><Search searchChange={this.handleSearchChange.bind(this)}/></div>
           </div>
         </nav>
         <div className="row">
@@ -36,7 +44,7 @@ class App extends React.Component {
             <div><VideoPlayer video={this.state.currentVideo} /></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={this.props.data} clickHandler={this.onVideoClick.bind(this)}/></div>
+            <div><VideoList videos={this.state.currentSearchInput || this.props.data} clickHandler={this.handleVideoClick.bind(this)}/></div>
           </div>
         </div>
       </div>

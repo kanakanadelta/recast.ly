@@ -62,6 +62,10 @@ body {
   padding: 8px;
 }
 
+.video-list-entry:hover {
+  cursor: pointer;
+}
+
 .video-list-entry-title {
   font-weight: bold;
 }

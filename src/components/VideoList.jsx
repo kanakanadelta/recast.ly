@@ -1,11 +1,11 @@
 var VideoList = (props) => {
-  // console.log(props);
+  // props.onClick.bind(this);
   //target DOM element with 'video-list' class name
-    //map out each new instance of VideoListEntry w/ each individual video data.
+  //map out each new instance of VideoListEntry w/ each individual video data.
   return (
     <div className="video-list">
       {props.videos.map( (video) => 
-        <VideoListEntry video={video} key={video.id.videoId}/>
+        <VideoListEntry video={video} key={video.id.videoId} clickHandler={props.clickHandler}/>
       )}
     </div>
   );

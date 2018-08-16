@@ -7,10 +7,14 @@ class App extends React.Component {
     this.state = {
       //want to have a listener for selecting a video in VideoList
       // currentVideo: <VideoPlayer video={} />,
-      currentVideo: this.props.data[0],
-      currentSearchInput: '',
+      currentVideo: exampleVideoData[0],
+      videos: exampleVideoData,
     };
   }
+
+  // componentDidMount() {
+  //   this.searchYouTube(options('queen bohemian rhapsody'));
+  // }
 
   handleVideoClick(event) {
     //using the built in setState function ...
@@ -21,10 +25,10 @@ class App extends React.Component {
     });
   }
 
-  handleSearchChange(event) {
-    console.log(event);
+  handleSearchChange(query) {
+    
     this.setState({
-      currentSearchInput: searchYouTube(options(event)),
+      videos: this.props.searchYouTube(query),
     });
   }
 
@@ -32,6 +36,7 @@ class App extends React.Component {
   //In each JSX component, pass in desired property and prop name in props
   //Don't pass in onClick property to a tag until it is actually used for onClick
   render() {
+    console.log(this.state.videos);
     return (
       <div>
         <nav className="navbar">
@@ -44,7 +49,7 @@ class App extends React.Component {
             <div><VideoPlayer video={this.state.currentVideo} /></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={this.state.currentSearchInput || this.props.data} clickHandler={this.handleVideoClick.bind(this)}/></div>
+            <div><VideoList videos={this.state.videos} clickHandler={this.handleVideoClick.bind(this)}/></div>
           </div>
         </div>
       </div>

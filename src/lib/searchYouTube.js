@@ -1,26 +1,29 @@
-var options = (searchInput) => {
-  return {
-    key: YOUTUBE_API_KEY,
-    maxResults: 5,
-    part: 'snippet',
-    q: searchInput,
-  };
-};
-
 //took out callback argument..... may need it (later?)
-var searchYouTube = (options, callback) => {
-  $.ajax({
+var searchYouTube = ({query}, callback) => {
+  $.get({
     url: 'https://www.googleapis.com/youtube/v3/search',
-    type: 'GET',
-    data: options,
-    success: (results) => {
-      console.log('SUCCESS! Here\'s your data: ', results.items);
-      return results.items;
+    data: {
+      key: YOUTUBE_API_KEY,
+      maxResults: 5,
+      part: 'snippet',
+      q: query,
+      embeddable: true,
+      type: 'video',
     },
-    error: () => {
-      console.log('FAILURE! You darn messed up', options);
-    },
-  });
+    // success: (results) => {
+    //   console.log('SUCCESS! Here\'s your data: ', results.items);
+    //   return results.items;
+    // },
+    // error: () => {
+    //   console.log('FAILURE! You darn messed up');
+    // },
+  })
+    .done( ({items}) => {
+      if (callback) {
+        callback(items);
+      }
+    })
+    .error();
 };
 
 window.searchYouTube = searchYouTube;

@@ -14,7 +14,6 @@ class App extends React.Component {
 
   onVideoClick(event) {
     //using the built in setState function ...
-    // console.log('CLICKED! See: ', clickData);
     this.setState({
       //modify property in this.state
       currentVideo: event,
@@ -23,6 +22,7 @@ class App extends React.Component {
 
   //Render following components into our DOM
   //In each JSX component, pass in desired property and prop name in props
+  //Don't pass in onClick property to a tag until it is actually used for onClick
   render() {
     return (
       <div>

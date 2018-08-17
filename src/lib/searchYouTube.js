@@ -1,10 +1,10 @@
 //took out callback argument..... may need it (later?)
-var searchYouTube = ({query}, callback) => {
+var searchYouTube = ({key = YOUTUBE_API_KEY, query, max = 5}, callback) => {
   $.get({
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
-      key: YOUTUBE_API_KEY,
-      maxResults: 5,
+      key: key,
+      maxResults: max,
       part: 'snippet',
       q: query,
       embeddable: true,
@@ -23,7 +23,7 @@ var searchYouTube = ({query}, callback) => {
         callback(items);
       }
     })
-    .error();
+    .fail();
 };
 
 window.searchYouTube = searchYouTube;

@@ -12,31 +12,31 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.searchYouTube(options('queen bohemian rhapsody'));
-  // }
+  componentDidMount() {
+    this.handleSearchChange('queen bohemian rhapsody');
+  }
 
   handleVideoClick(event) {
     //using the built in setState function ...
-    console.log(event);
     this.setState({
       //modify property in this.state
       currentVideo: event,
     });
   }
 
+  //handles both rendering youtube searches and listening to change
   handleSearchChange(query) {
-    
-    this.setState({
-      videos: this.props.searchYouTube(query),
-    });
+    searchYouTube({query: query}, (items) => this.setState({
+      videos: items,
+      currentVideo: items[0], 
+    }));
   }
 
   //Render following components into our DOM
   //In each JSX component, pass in desired property and prop name in props
   //Don't pass in onClick property to a tag until it is actually used for onClick
   render() {
-    console.log(this.state.videos);
+    // console.log(this.state.videos);
     return (
       <div>
         <nav className="navbar">
